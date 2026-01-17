@@ -1,7 +1,7 @@
 use crate::transport::reqwest_transport::ReqwestTransport;
 use crate::{
     http::{HttpRequest, Method},
-    transport::Transport,
+    transport::transport::Transport
 };
 use httpmock::prelude::*;
 use url::Url;

@@ -1,7 +1,7 @@
 use ::url::Url;
 
 use crate::{
-    client::config::ClientConfig,
+    client::{config::ClientConfig, client::PokeApiClient},
     error::{Error, Result},
     transport::reqwest_transport::ReqwestTransport
 };
@@ -53,7 +53,7 @@ impl PokeApiClientBuilder {
         self
     }
 
-    pub fn build(self) -> Result<crate::client::PokeApiClient> {
+    pub fn build(self) -> Result<PokeApiClient> {
         let mut rb = reqwest::Client::builder();
 
         if let Some(t) = self.timeout {
@@ -69,7 +69,7 @@ impl PokeApiClientBuilder {
 
         let transport = ReqwestTransport::new(client);
 
-        Ok(crate::client::PokeApiClient {
+        Ok(PokeApiClient {
             config: self.config,
             transport,
         })

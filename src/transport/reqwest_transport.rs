@@ -1,7 +1,7 @@
 use crate::{
     error::{Error, Result},
     http::{Headers, HttpRequest, HttpResponse},
-    transport::Transport,
+    transport::transport::Transport
 };
 
 pub(crate) struct ReqwestTransport {

@@ -1,12 +1,14 @@
 use crate::{
-    client::PokeApiClient,
+    client::{PokeApiClient, pagination::page_query},
     error::Result,
-    http::Query,
     models::{
         common::{NamedApiResource, Page},
         generation::Generation,
     },
-    types::identifiers::{GenerationName, GenerationRef},
+    types::{
+        identifiers::{GenerationName, GenerationRef},
+        pagination::PageRequest
+    },
 };
 
 impl PokeApiClient {
@@ -33,11 +35,8 @@ impl PokeApiClient {
     /// List generations (name+url) with pagination.
     ///
     /// GET /generation?limit=...&offset=...
-    pub async fn generation_list(&self, limit: u32, offset: u32) -> Result<Page<NamedApiResource>> {
-        let mut q = Query::new();
-        q.set("limit", limit.to_string());
-        q.set("offset", offset.to_string());
-
+    pub async fn generation_list(&self, page: PageRequest) -> Result<Page<NamedApiResource>> {
+        let q = page_query(page);
         self.get_json("generation", Some(q)).await
     }
 }

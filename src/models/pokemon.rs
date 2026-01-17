@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::models::common::{ApiResource, NamedApiResource, VersionGameIndex};
+use crate::models::common::{NamedApiResource, VersionGameIndex};
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Pokemon {

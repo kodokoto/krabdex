@@ -1,9 +1,8 @@
 use crate::{
-    client::PokeApiClient,
+    client::{PokeApiClient, pagination::page_query},
     error::Result,
-    http::Query,
-    models::{common::NamedApiResource, pokemon::Pokemon},
-    types::identifiers::{PokemonName, PokemonRef},
+    models::{common::{NamedApiResource, Page}, pokemon::Pokemon},
+    types::{pagination::PageRequest, identifiers::{PokemonName, PokemonRef}},
 };
 
 impl PokeApiClient {
@@ -30,15 +29,8 @@ impl PokeApiClient {
     /// List Pokemon resources (name+url) with pagination.
     ///
     /// This maps to GET /pokemon?limit=...&offset=...
-    pub async fn pokemon_list(
-        &self,
-        limit: u32,
-        offset: u32,
-    ) -> Result<crate::models::common::Page<NamedApiResource>> {
-        let mut q = Query::new();
-        q.set("limit", limit.to_string());
-        q.set("offset", offset.to_string());
-
+    pub async fn pokemon_list(&self, page: PageRequest) -> Result<Page<NamedApiResource>> {
+        let q = page_query(page);
         self.get_json("pokemon", Some(q)).await
     }
 }
