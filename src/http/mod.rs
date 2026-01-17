@@ -86,3 +86,6 @@ impl HttpResponse {
         String::from_utf8_lossy(&self.body).to_string()
     }
 }
+
+#[cfg(test)]
+mod tests;

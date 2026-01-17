@@ -1,5 +1,6 @@
-use krabdex::http::url::join_base;
 use url::Url;
+
+use crate::{error::Error, http::url::join_base};
 
 #[test]
 fn join_base_trims_slashes_and_preserves_segments() {
@@ -32,5 +33,5 @@ fn join_base_rejects_non_base_urls() {
 
     let err = join_base(&base, "api/v2", "pokemon").unwrap_err();
 
-    assert!(matches!(err, krabdex::error::Error::Internal(_)));
+    assert!(matches!(err, Error::Internal(_)));
 }
