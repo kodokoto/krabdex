@@ -1,7 +1,7 @@
-pub mod http;
-pub mod url;
+pub(crate) mod http;
+pub(crate) mod url;
 
-pub use http::*;
+pub(crate) use http::*;
 
 #[cfg(test)]
 mod tests;

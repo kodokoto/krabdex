@@ -1,4 +1,7 @@
 pub mod error;
-pub mod classify;
+pub(crate) mod classify;
 
 pub use error::{Error, ApiError, ApiErrorKind, Result};
+
+#[cfg(test)]
+mod tests;

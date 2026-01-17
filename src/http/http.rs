@@ -41,23 +41,11 @@ impl Query {
 }
 
 #[derive(Debug, Clone)]
-pub enum Body {
-    Empty,
-    Bytes(Vec<u8>),
-    Json(Vec<u8>),
-}
-
-impl Default for Body {
-    fn default() -> Self { Body::Empty }
-}
-
-#[derive(Debug, Clone)]
 pub struct HttpRequest {
     pub method: Method,
     pub url: Url,
     pub headers: Headers,
     pub query: Query,
-    pub body: Body,
 }
 
 impl HttpRequest {
@@ -67,7 +55,6 @@ impl HttpRequest {
             url,
             headers: Headers::new(),
             query: Query::new(),
-            body: Body::Empty,
         }
     }
 }
@@ -80,7 +67,4 @@ pub struct HttpResponse {
 }
 
 impl HttpResponse {
-    pub fn body_as_str_lossy(&self) -> String {
-        String::from_utf8_lossy(&self.body).to_string()
-    }
 }

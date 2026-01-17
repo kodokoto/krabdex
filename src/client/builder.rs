@@ -28,6 +28,15 @@ impl PokeApiClientBuilder {
         Self::default()
     }
 
+    /// Start a builder from an existing `ClientConfig`.
+    pub fn from_config(config: ClientConfig) -> Self {
+        Self {
+            config,
+            timeout: Some(std::time::Duration::from_secs(10)),
+            user_agent: Some("krabdex/0.1.0".to_string()),
+        }
+    }
+
     pub fn base_url(mut self, url: Url) -> Self {
         self.config.base_url = url;
         self
