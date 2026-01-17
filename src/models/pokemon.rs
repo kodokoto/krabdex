@@ -43,7 +43,7 @@ pub struct Pokemon {
 pub struct PokemonAbility {
     pub is_hidden: bool,
     pub slot: u8,
-    pub ability: NamedApiResource,
+    pub ability: Option<NamedApiResource>,
 }
 
 /* ---------- Held Items ---------- */

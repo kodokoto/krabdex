@@ -3,7 +3,7 @@ use ::url::Url;
 use crate::{
     client::config::ClientConfig,
     error::{Error, Result},
-    transport::reqwest_transport::ReqwestTransport, // internal path
+    transport::reqwest_transport::ReqwestTransport
 };
 
 #[derive(Debug)]
