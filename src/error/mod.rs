@@ -29,6 +29,13 @@ pub enum Error {
         #[source]
         source: serde_json::Error,
     },
+
+    /// User provided invalid input (local validation failure)
+    #[error("invalid argument `{field}`: {reason}")]
+    InvalidArgument {
+        field: &'static str,
+        reason: String,
+    },
 }
 
 #[derive(Debug)]
