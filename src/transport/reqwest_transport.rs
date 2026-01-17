@@ -1,7 +1,7 @@
 use crate::{
     error::{Error, Result},
-    http::{Headers, HttpRequest, HttpResponse},
-    transport::transport::Transport
+    http::{Headers, HttpRequest, HttpResponse, Method},
+    transport::transport::Transport,
 };
 
 pub(crate) struct ReqwestTransport {
@@ -18,17 +18,20 @@ impl Transport for ReqwestTransport {
 
     // Map our HTTP types to Reqwest (Hyper)
     async fn send(&self, request: HttpRequest) -> Result<HttpResponse> {
+        let HttpRequest { method, url, headers, query } = request;
 
-        let mut request_builder = self.client.get(request.url);
+        let mut request_builder = match method {
+            Method::Get => self.client.get(url),
+        };
 
         // Query params
-        if request.query.iter().next().is_some() {
-            let query_pairs = request.query.iter().collect::<Vec<_>>();
+        if query.iter().next().is_some() {
+            let query_pairs = query.iter().collect::<Vec<_>>();
             request_builder = request_builder.query(&query_pairs);
         }
 
         // Headers
-        for (k, v) in request.headers.iter() {
+        for (k, v) in headers.iter() {
             request_builder = request_builder.header(k, v);
         }
 
