@@ -6,6 +6,7 @@ use crate::{
     transport::reqwest_transport::ReqwestTransport
 };
 
+/// Builder for constructing a `PokeApiClient` with custom settings.
 #[derive(Debug)]
 pub struct PokeApiClientBuilder {
     config: ClientConfig,
@@ -24,6 +25,7 @@ impl Default for PokeApiClientBuilder {
 }
 
 impl PokeApiClientBuilder {
+    /// Create a builder with default configuration.
     pub fn new() -> Self {
         Self::default()
     }
@@ -37,31 +39,37 @@ impl PokeApiClientBuilder {
         }
     }
 
+    /// Override the base URL (defaults to `https://pokeapi.co/`).
     pub fn base_url(mut self, url: Url) -> Self {
         self.config.base_url = url;
         self
     }
 
+    /// Override the API prefix (defaults to `api/v2`).
     pub fn api_prefix(mut self, prefix: impl Into<String>) -> Self {
         self.config.api_prefix = prefix.into();
         self
     }
 
+    /// Add or override a default header applied to every request.
     pub fn default_header(mut self, key: impl Into<String>, value: impl Into<String>) -> Self {
         self.config.default_headers.insert(key, value);
         self
     }
 
+    /// Set a client-wide timeout.
     pub fn timeout(mut self, d: std::time::Duration) -> Self {
         self.timeout = Some(d);
         self
     }
 
+    /// Set the User-Agent header for all requests.
     pub fn user_agent(mut self, ua: impl Into<String>) -> Self {
         self.user_agent = Some(ua.into());
         self
     }
 
+    /// Build a `PokeApiClient` from the accumulated configuration.
     pub fn build(self) -> Result<PokeApiClient> {
         let mut rb = reqwest::Client::builder();
 

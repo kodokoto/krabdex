@@ -1,26 +1,28 @@
 use thiserror::Error;
 use std::{error::Error as StdError, fmt};
 
+/// Convenience result type used throughout the SDK.
 pub type Result<T> = std::result::Result<T, Error>;
 
+/// Top-level error type for the SDK.
 #[derive(Debug, Error)]
 pub enum Error {
-    // Internal SDK error (bug)
+    /// Internal SDK error (bug).
     #[error("internal error: {0}")]
     Internal(&'static str),
     
-    // Networing error (TLS, DNS, IO, etc)
+    /// Networking error (TLS, DNS, IO, etc).
     #[error("transport error")]
     Transport {
         #[source]
         source: Box<dyn StdError + Send + Sync>,
     },
 
-    // API returned a non-success HTTP status
+    /// API returned a non-success HTTP status.
     #[error("api error: {0}")]
     Api(ApiError),
 
-    // Response body could not be deserialized
+    /// Response body could not be deserialized.
     #[error("failed to deserialize response from {url}")]
     Deserialize {
         url: String,
@@ -28,7 +30,7 @@ pub enum Error {
         source: serde_json::Error,
     },
 
-    /// User provided invalid input (local validation failure)
+    /// User provided invalid input (local validation failure).
     #[error("invalid argument `{field}`: {reason}")]
     InvalidArgument {
         field: &'static str,
@@ -36,6 +38,7 @@ pub enum Error {
     },
 }
 
+/// Details of an API error response.
 #[derive(Debug)]
 pub struct ApiError {
     pub status: u16,
@@ -43,6 +46,7 @@ pub struct ApiError {
     pub kind: ApiErrorKind,
 }
 
+/// Classification of API error responses.
 #[derive(Debug)]
 pub enum ApiErrorKind {
     NotFound {

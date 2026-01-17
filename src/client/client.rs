@@ -8,16 +8,19 @@ use crate::{
     transport::reqwest_transport::ReqwestTransport,
 };
 
+/// Async client for interacting with the PokeAPI.
 pub struct PokeApiClient {
     pub(crate) config: ClientConfig,
     pub(crate) transport: ReqwestTransport,
 }
 
 impl PokeApiClient {
+    /// Create a client with default configuration.
     pub fn new() -> Result<Self> {
         Self::builder().build()
     }
 
+    /// Get a builder to customize client configuration.
     pub fn builder() -> PokeApiClientBuilder {
         PokeApiClientBuilder::new()
     }

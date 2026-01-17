@@ -1,10 +1,14 @@
 use ::url::Url;
 use crate::http::Headers;
 
+/// Configuration values used to construct a `PokeApiClient`.
 #[derive(Debug, Clone)]
 pub struct ClientConfig {
+    /// Base URL of the PokeAPI instance (defaults to `https://pokeapi.co/`).
     pub base_url: Url,
+    /// API prefix appended after the base URL (defaults to `api/v2`).
     pub api_prefix: String,
+    /// Default headers applied to every request.
     pub default_headers: Headers,
 }
 

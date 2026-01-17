@@ -3,6 +3,7 @@ use serde_json::Value;
 
 use crate::models::common::{NamedApiResource, VersionGameIndex};
 
+/// PokeAPI Pokémon resource.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct Pokemon {
     pub id: u32,
@@ -39,6 +40,7 @@ pub struct Pokemon {
 
 /* ---------- Abilities ---------- */
 
+/// Ability info attached to a Pokémon.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PokemonAbility {
     pub is_hidden: bool,
@@ -48,12 +50,14 @@ pub struct PokemonAbility {
 
 /* ---------- Held Items ---------- */
 
+/// Held item details.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct HeldItem {
     pub item: NamedApiResource,
     pub version_details: Vec<HeldItemVersionDetail>,
 }
 
+/// Held item details per version.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct HeldItemVersionDetail {
     pub rarity: u32,
@@ -62,6 +66,7 @@ pub struct HeldItemVersionDetail {
 
 /* ---------- Moves ---------- */
 
+/// Move entry on a Pokémon.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PokemonMove {
     #[serde(rename = "move")]
@@ -69,6 +74,7 @@ pub struct PokemonMove {
     pub version_group_details: Vec<MoveVersionGroupDetail>,
 }
 
+/// Move details per version group.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct MoveVersionGroupDetail {
     pub level_learned_at: u32,
@@ -78,6 +84,7 @@ pub struct MoveVersionGroupDetail {
 
 /* ---------- Stats ---------- */
 
+/// Stat entry for a Pokémon.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PokemonStat {
     pub base_stat: u32,
@@ -87,6 +94,7 @@ pub struct PokemonStat {
 
 /* ---------- Types ---------- */
 
+/// Type slot info (includes slot number).
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PokemonTypeSlot {
     pub slot: u8,
@@ -97,6 +105,7 @@ pub struct PokemonTypeSlot {
 
 /* ---------- Past Types ---------- */
 
+/// Historical type assignments for a Pokémon.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PastType {
     pub generation: NamedApiResource,
@@ -105,6 +114,7 @@ pub struct PastType {
 
 /* ---------- Past Abilities ---------- */
 
+/// Historical ability assignments for a Pokémon.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PastAbility {
     pub generation: NamedApiResource,
@@ -113,6 +123,7 @@ pub struct PastAbility {
 
 /* ---------- Cries (newer field) ---------- */
 
+/// Pokémon cries (latest and legacy).
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PokemonCries {
     pub latest: String,
