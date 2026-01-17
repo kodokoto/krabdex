@@ -69,6 +69,45 @@ All operations return `krabdex::Result<T>` with rich `krabdex::Error` variants:
 - Tests: `cargo test`
 - Docs: `cargo doc --no-deps --open`
 
+# krabdex-mcp
+
+This workspace includes an MCP server for Codex-compatible agents.
+
+## Install/build
+
+```bash
+# From the workspace root
+cargo build -p krabdex-mcp --release
+```
+
+## Configure Codex
+
+Edit `~/.codex/config.toml` and add:
+
+```toml
+[mcp_servers.krabdex]
+command = "cargo"
+args = ["run", "--release", "-p", "krabdex-mcp"]
+cwd = "/Users/kodokoto/dev/interviews/speakeasy/krabdex" # adjust to your checkout
+startup_timeout_sec = 20
+tool_timeout_sec = 60
+```
+
+Restart Codex; it will launch the MCP server over stdio.
+
+## Available tools
+
+- `pokemon.get` (args: `id` or `name`)
+- `pokemon.list` (args: `limit`, `offset`)
+- `generation.get` (args: `id` or `name`)
+- `generation.list` (args: `limit`, `offset`)
+
+Example tool call payload:
+
+```json
+{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"pokemon.get","arguments":{"name":"pikachu"}}}
+```
+
 ## License
 
 MIT or Apache-2.0

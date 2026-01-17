@@ -127,5 +127,6 @@ pub struct PastAbility {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct PokemonCries {
     pub latest: String,
-    pub legacy: String,
+    #[serde(default)]
+    pub legacy: Option<String>,
 }

@@ -6,10 +6,13 @@ license = "MIT OR Apache-2.0"
 description = "MCP integration using the krabdex PokeAPI SDK"
 
 [dependencies]
-krabdex = { path = "../krabdex" }
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+krabdex = { version = "0.1.0", path = "../krabdex" }
+tokio = { version = "1", features = ["full", "macros", "rt-multi-thread"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+rmcp = { version = "0.13.0", features = ["server", "transport-io", "schemars"] }
+schemars = "1.2.0"
+anyhow = "1"
 
 [dev-dependencies]
 anyhow = "1"
