@@ -3,10 +3,13 @@ name = "krabdex"
 version = "0.1.0"
 edition = "2021"
 description = "A type-safe, async Rust SDK for the PokeAPI"
+documentation = "https://docs.rs/krabdex"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/kodokoto/krabdex"
 readme = "README.md"
 rust-version = "1.88"
+keywords = ["pokemon", "sdk", "pokeapi", "http", "client"]
+categories = ["api-bindings", "asynchronous", "web-programming"]
 
 [dependencies]
 backoff = "0.4.0"

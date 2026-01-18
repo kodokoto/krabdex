@@ -3,16 +3,18 @@ name = "krabdex-mcp"
 version = "0.1.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
-description = "MCP integration using the krabdex PokeAPI SDK"
+description = "MCP server for the krabdex PokeAPI SDK"
+repository = "https://github.com/kodokoto/krabdex"
+readme = "README.md"
+documentation = "https://docs.rs/krabdex-mcp"
+keywords = ["pokemon", "pokeapi", "mcp", "sdk"]
+categories = ["api-bindings", "asynchronous", "web-programming"]
 
 [dependencies]
 krabdex = { version = "0.1.0", path = "../krabdex" }
-tokio = { version = "1", features = ["full", "macros", "rt-multi-thread"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "io-std", "io-util", "signal"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 rmcp = { version = "0.13.0", features = ["server", "transport-io", "schemars"] }
 schemars = "1.2.0"
-anyhow = "1"
-
-[dev-dependencies]
 anyhow = "1"
