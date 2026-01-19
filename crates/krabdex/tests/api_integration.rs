@@ -48,10 +48,16 @@ async fn pokemon_by_id_deserializes_minimal_payload() {
                 "types": [
                     { "slot": 1, "type": { "name": "electric", "url": "https://pokeapi.co/api/v2/type/13/" } }
                 ],
-                "past_types": [],
-                "past_abilities": [],
-                "sprites": {},
-                "cries": null
+                "sprites": {
+                    "front_default": "https://img/front_default.png",
+                    "front_shiny": "https://img/front_shiny.png",
+                    "front_female": "https://img/front_female.png",
+                    "front_shiny_female": "https://img/front_shiny_female.png",
+                    "back_default": "https://img/back_default.png",
+                    "back_shiny": "https://img/back_shiny.png",
+                    "back_female": "https://img/back_female.png",
+                    "back_shiny_female": "https://img/back_shiny_female.png"
+                }
             }"#,
         );
     });
@@ -62,7 +68,7 @@ async fn pokemon_by_id_deserializes_minimal_payload() {
     m.assert();
     assert_eq!(pokemon.id, 25);
     assert_eq!(pokemon.name, "pikachu");
-    assert_eq!(pokemon.types[0].ty.name, "electric");
+    assert_eq!(pokemon.types[0].type_.name, "electric");
 }
 
 #[tokio::test]
@@ -114,7 +120,7 @@ async fn pokemon_list_sets_limit_and_offset() {
             r#"{
                 "count": 200,
                 "next": "http://example.com/next",
-                "previous": null,
+                "previous": false,
                 "results": [
                     {"name":"foo","url":"https://pokeapi.co/api/v2/pokemon/1/"},
                     {"name":"bar","url":"https://pokeapi.co/api/v2/pokemon/2/"}

@@ -17,7 +17,7 @@ pub(crate) mod http;
 pub(crate) mod transport;
 pub mod client;
 pub mod types;
-pub mod models;
+pub use pokeapi_model as models;
 pub mod api;
 
 pub use client::PokeApiClient;
